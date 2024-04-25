@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:carsds="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="MAUIPractice.MainPage">
+    <Grid >
+
+        <carsds:CoverFlowView  
+            IsClippedToBounds="True"
+            IsCyclical="True"
+            IsPanSwipeEnabled="True"
+            IsHorizontalOrientation="False"
+         
+            VerticalSwipeThresholdDistance="200"
+            IsRightToLeftFlowDirectionEnabled="False"
+            IsVerticalSwipeEnabled="True"  
+       
+  
+            ItemsSource="{Binding QuestionList}" >
+            <x:Arguments>
+                <proc:CoverFlowProcessor ScaleFactor="0.75" OpacityFactor="0.25" />
+            </x:Arguments>
+
+            <carsds:CoverFlowView.ItemTemplate>
+                <DataTemplate>
+
+                    <Frame Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.5*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding ImageSource}" Aspect="Fill"/>
+                            <Label Text="Concepts"  FontAttributes="Bold" FontSize="Title" Margin="10"/>
+
+                            <Frame Grid.Row="1" Margin="5"
+                                   HasShadow="True"
+                                   CornerRadius="5" BorderColor="LightGray"
+                                   >
+                             
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Header}" FontSize="Title" TextColor="Black" FontAttributes="Bold" />
+                                    <Label Text="{Binding Question}" FontSize="Subtitle" TextColor="Black" LineBreakMode="WordWrap"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <Frame Grid.Row="2" HasShadow="True" 
+                                   Margin="5" BorderColor="LightGray" 
+                                   CornerRadius="5" >
+                                <Label Text="{Binding Answer}" 
+                                   TextColor="Black" FontSize="Subtitle" 
+                                    LineBreakMode="WordWrap"/>
+                            </Frame>
+
+                            <Grid Padding="20" Grid.Row="3" ColumnDefinitions="*,*,*">
+                                <Button Text="A" Grid.Column="0" Margin="5"/>
+                                <Button Text="B" Grid.Column="1" Margin="5"/>
+                                <Button Text="C" Grid.Column="2" Margin="5"/>
+                            </Grid>
+                                
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </carsds:CoverFlowView.ItemTemplate>
+        </carsds:CoverFlowView>
+    </Grid>
+
+
+</ContentPage>
